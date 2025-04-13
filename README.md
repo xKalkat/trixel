@@ -13,11 +13,17 @@ Trixel is a modern, glowy take on classic Tetris you can play right in your brow
 
 ## Getting Started
 
-### Prerequisites
+You can either run the game locally from source, or download a compiled release.
 
-You don’t need any dependencies. Just clone the repo and open `index.html` in a browser.
+### Option 1: Download the Release (Simplest)
 
-### Local Setup
+1. Go to the [Releases](https://github.com/xKalkat/trixel/releases) page.
+2. Download the latest `trixel-vX.X.zip` file.
+3. Extract it and open `index.html` in your browser.
+
+This version is production-ready and stripped of any dev-only files.
+
+### Option 2: Clone and Run Locally
 
 1. Clone the repository:
 
@@ -28,7 +34,7 @@ You don’t need any dependencies. Just clone the repo and open `index.html` in 
 
 2. Open `index.html` in your browser.
 
-   Alternatively, to run it with a local web server (recommended for Chrome):
+   Or, to serve with a local web server (recommended for Chrome):
 
    ```bash
    python3 -m http.server
