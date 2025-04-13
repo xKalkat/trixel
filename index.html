@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trixel</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="game-container">
+      <div id="top-bar">
+        <button id="restart" title="Restart">&#8634;</button>
+        <div id="score-container"><div id="score">0</div></div>
+        <button id="pause" title="Pause">&#10073;&#10073;</button>
+      </div>
+
+      <div id="best-score">Best score: 0</div>
+      <canvas id="trixel" width="300" height="540"></canvas>
+
+      <div id="controls-overlay" class="overlay">
+        <p>↑ W — Rotate</p>
+        <p>← A / → D — Move</p>
+        <p>↓ S — Soft drop</p>
+        <p>Space — Hard drop</p>
+        <p>X — Toggle ghost piece</p>
+        <!-- 👈 new line -->
+        <p>Esc — Close popup</p>
+      </div>
+    </div>
+
+    <script type="module" src="main.js"></script>
+  </body>
+</html>
