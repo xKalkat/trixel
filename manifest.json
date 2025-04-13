@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Trixel",
   "version": "1.0",
-  "description": "A cool Tetris game as a Chrome extension!",
+  "description": "Trixel is a modern, glowy take on classic Tetris you can play right in your browser.",
   "action": {
     "default_popup": "index.html"
   },
