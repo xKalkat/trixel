@@ -43,16 +43,16 @@ This version is production-ready and stripped of any dev-only files.
 
 ## Controls
 
-| Key             | Action              |
-|------------------|----------------------|
-| Left / A         | Move left           |
-| Right / D        | Move right          |
-| Down / S         | Soft drop           |
-| Up / W           | Rotate              |
-| Space            | Hard drop           |
-| X                | Toggle ghost piece  |
-| Pause button     | Pause/resume        |
-| Restart button   | Reset the game      |
+| Key            | Action             |
+| -------------- | ------------------ |
+| Left / A       | Move left          |
+| Right / D      | Move right         |
+| Down / S       | Soft drop          |
+| Up / W         | Rotate             |
+| Space          | Hard drop          |
+| X              | Toggle ghost piece |
+| Pause button   | Pause/resume       |
+| Restart button | Reset the game     |
 
 ## Project Structure
 

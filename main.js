@@ -5,6 +5,8 @@ import { maybeUpdateBestScore, updateScore } from "./js/storage.js";
 import { showControlsOverlay } from "./js/overlay.js";
 import { saveGameState } from "./js/storage.js";
 import { setupUIEvents } from "./js/uiEvents.js";
+import { loadSavedTheme } from "./js/theme.js";
+loadSavedTheme();
 const hasLoaded = loadGameState();
 update();
 maybeUpdateBestScore();

@@ -2,7 +2,12 @@ import { gameState } from "./gameState.js";
 import { update } from "./updateLoop.js";
 import { playerReset } from "./player.js";
 import { gameOverReset } from "./playerState.js";
-import { showControlsOverlay } from "./overlay.js";
+import {
+  hidePauseMenu,
+  showPauseMenu,
+  showControlsOverlay,
+  showControlsEditor,
+} from "./overlay.js";
 
 /**
  * Initializes UI event listeners for restart and pause buttons.
@@ -14,20 +19,14 @@ export function setupUIEvents() {
    * Resets game state, clears saved state, spawns a new piece, and resumes the game if paused.
    */
   document.getElementById("restart").addEventListener("click", () => {
-    gameOverReset();
-    localStorage.removeItem("trixelGameState");
-    gameState.isTouchingGround = false;
-    gameState.lockTimer = 0;
-    playerReset();
-
-    if (gameState.isPaused) {
-      gameState.isPaused = false;
-      gameState.lastTime = performance.now();
-      document.getElementById("pause").textContent = "⏸";
-      update();
+    if (!gameState.isPaused) {
+      gameOverReset();
+      localStorage.removeItem("trixelGameState");
+      gameState.isTouchingGround = false;
+      gameState.lockTimer = 0;
+      playerReset();
+      showControlsOverlay(true, 1000);
     }
-
-    showControlsOverlay(true, 1000);
   });
 
   /**
@@ -37,8 +36,23 @@ export function setupUIEvents() {
   document.getElementById("pause").addEventListener("click", () => {
     gameState.isPaused = !gameState.isPaused;
     const pauseBtn = document.getElementById("pause");
-    pauseBtn.textContent = gameState.isPaused ? "▶" : "⏸";
-    if (!gameState.isPaused) {
+
+    if (gameState.isPaused) {
+      pauseBtn.textContent = "▶";
+      pauseBtn.classList.add("small");
+      showPauseMenu();
+    } else {
+      pauseBtn.textContent = "⏸";
+      pauseBtn.classList.remove("small");
+      hidePauseMenu();
+      gameState.lastTime = performance.now();
+      update();
+    }
+
+    if (gameState.isPaused) {
+      showPauseMenu();
+    } else {
+      hidePauseMenu();
       gameState.lastTime = performance.now();
       update();
     }
@@ -51,5 +65,13 @@ export function setupUIEvents() {
     button.setAttribute("tabindex", "-1");
     button.addEventListener("keydown", (e) => e.preventDefault());
     button.addEventListener("mousedown", (e) => e.preventDefault());
+  });
+
+  document.getElementById("btn-edit-controls").addEventListener("click", () => {
+    showControlsEditor();
+  });
+
+  document.getElementById("btn-edit-theme").addEventListener("click", () => {
+    window.location.href = "themeEditor.html";
   });
 }

@@ -10,6 +10,7 @@ import { commitChanges } from "./storage.js";
 import { SCORE } from "./constants.js";
 import { instantLockThreshold } from "./constants.js";
 import { playerMove } from "./player.js";
+import { renderPieceBag } from "./renderer.js";
 
 /**
  * Handles repeated downward movement of the piece during soft drop.
@@ -19,22 +20,22 @@ import { playerMove } from "./player.js";
  */
 export function updateSoftDrop(deltaTime) {
   gameState.downTimer += deltaTime;
-
   if (
     gameState.isTouchingGround &&
     isGrounded(gameState.arena, gameState.player) &&
     gameState.lockTimer > instantLockThreshold
   ) {
-    merge(gameState.arena, gameState.player);
-    playerReset();
-    arenaSweep();
-    commitChanges();
-    gameState.isTouchingGround = false;
-    gameState.lockTimer = 0;
-    gameState.downTimer = 0;
+    if (gameState.instantSoftDropLock) {
+      merge(gameState.arena, gameState.player);
+      playerReset();
+      arenaSweep();
+      commitChanges();
+      gameState.isTouchingGround = false;
+      gameState.lockTimer = 0;
+      gameState.downTimer = 0;
+    }
   } else if (gameState.downTimer > gameState.downInterval) {
     playerDrop();
-    gameState.score += SCORE.DROP;
     gameState.downTimer = 0;
     commitChanges();
   }
@@ -62,7 +63,6 @@ export function checkAutoDrop(deltaTime) {
  */
 export function checkLockDelay(deltaTime) {
   const grounded = isGrounded(gameState.arena, gameState.player);
-
   if (grounded && !gameState.isTouchingGround) {
     gameState.isTouchingGround = true;
     gameState.lockTimer = 0;
@@ -118,11 +118,11 @@ export function update(time = 0) {
     }
     saveGameState();
   }
-
   if (gameState.downHeld) {
     updateSoftDrop(deltaTime);
   }
 
   draw();
+  renderPieceBag();
   requestAnimationFrame(update);
 }

@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Select Theme</title>
+    <link rel="stylesheet" href="base.css" />
+    <link rel="stylesheet" href="theme-classic.css" />
+    <link rel="stylesheet" href="theme-light.css" />
+    <link rel="stylesheet" href="theme-neon.css" />
+    <script type="module" src="/js/themeEditor.js"></script>
+  </head>
+  <body>
+    <div id="theme-editor">
+      <h2>Choose Your Theme</h2>
+      <div class="theme-buttons">
+        <button class="theme-btn" data-theme="classic">Classic</button>
+        <button class="theme-btn" data-theme="light">Light</button>
+        <button class="theme-btn" data-theme="neon">Neon</button>
+        <button class="theme-btn" data-theme="custom">Custom</button>
+      </div>
+
+      <div id="custom-theme-form">
+        <div class="theme-input-group">
+          <label for="custom-bg">Background Color:</label>
+          <input type="color" id="custom-bg" />
+        </div>
+        <div class="theme-input-group">
+          <label for="custom-accent">Accent Color:</label>
+          <input type="color" id="custom-accent" />
+        </div>
+        <div class="theme-input-group">
+          <label>Piece Colors (T, J, L, O, S, Z, I):</label>
+        </div>
+        <div id="custom-piece-colors">
+          <input type="color" id="color-t" />
+          <input type="color" id="color-j" />
+          <input type="color" id="color-l" />
+          <input type="color" id="color-o" />
+          <input type="color" id="color-s" />
+          <input type="color" id="color-z" />
+          <input type="color" id="color-i" />
+        </div>
+        <div class="theme-input-group">
+          <label for="custom-text-color">Text Color:</label>
+          <input type="color" id="custom-text-color" />
+        </div>
+
+        <div class="theme-input-group">
+          <label for="custom-dim-color">Dim Text Color:</label>
+          <input type="color" id="custom-dim-color" />
+        </div>
+
+        <div class="theme-input-group">
+          <label for="custom-border-color">Border Color:</label>
+          <input type="color" id="custom-border-color" />
+        </div>
+
+        <div class="theme-input-group">
+          <label for="custom-box-glow">Box Glow:</label>
+          <input
+            type="text"
+            id="custom-box-glow"
+            placeholder="e.g. 0 0 8px #0ff"
+          />
+        </div>
+
+        <div class="theme-input-group">
+          <label for="custom-text-glow">Text Glow:</label>
+          <input
+            type="text"
+            id="custom-text-glow"
+            placeholder="e.g. 0 0 6px #fff"
+          />
+        </div>
+
+        <div class="theme-input-group">
+          <label for="custom-font">Font Family:</label>
+          <input
+            type="text"
+            id="custom-font"
+            placeholder='"Courier New", monospace'
+          />
+        </div>
+
+        <div class="theme-input-group">
+          <label for="custom-editor-bg">Overlay Background:</label>
+          <input type="color" id="custom-editor-bg" />
+        </div>
+
+        <div class="theme-input-group">
+          <label for="custom-cell-glow">Cell Glow:</label>
+          <select id="custom-cell-glow">
+            <option value="none">None</option>
+            <option value="pulse">Pulse</option>
+            <option value="5">Static 5</option>
+            <option value="8">Static 8</option>
+          </select>
+        </div>
+        <button id="save-custom-theme">Save Custom Theme</button>
+      </div>
+      <button id="cancel-theme">Back to Game</button>
+    </div>
+  </body>
+</html>

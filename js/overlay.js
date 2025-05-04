@@ -16,3 +16,27 @@ export function showControlsOverlay(visible = true, autoHideMs = 1000) {
     }, autoHideMs);
   }
 }
+
+/**
+ * Displays the pause menu by setting its display to 'flex'.
+ */
+
+export function showPauseMenu() {
+  const menu = document.getElementById("pause-menu");
+  if (menu) menu.style.display = "flex";
+}
+
+/**
+ * Hides the pause menu by setting its display to 'none'.
+ */
+export function hidePauseMenu() {
+  const menu = document.getElementById("pause-menu");
+  if (menu) menu.style.display = "none";
+}
+
+/**
+ * Navigates the player to the controls editor screen.
+ */
+export function showControlsEditor() {
+  window.location.href = "controlsEditor.html";
+}

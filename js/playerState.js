@@ -31,8 +31,7 @@ export function merge(arena, player) {
   });
 
   if (triggeredGameOver) {
-    arena.forEach((row) => row.fill(0));
-    gameState.score = 0;
+    gameOverReset();
     maybeUpdateBestScore();
     updateScore();
   }
@@ -43,10 +42,12 @@ export function merge(arena, player) {
  * Clears the arena, resets score and timers, and spawns a new piece.
  */
 export function gameOverReset() {
+  console.log("Game Over! Resetting game state.");
   gameState.arena.forEach((row) => row.fill(0));
   gameState.score = 0;
   gameState.isTouchingGround = false;
   gameState.lockTimer = 0;
+  gameState.heldPiece = null;
   commitChanges();
 
   playerReset();

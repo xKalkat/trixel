@@ -3,27 +3,29 @@ import { SCORE, hiddenRows } from "./constants.js";
 import { collide } from "./arena.js";
 import { isGrounded } from "./arena.js";
 import { saveGameState } from "./storage.js";
-import { getNextPiece, createPiece } from "./pieces.js";
+import { getNextPiece, createPiece, initializePieceBag } from "./pieces.js";
 /**
  * Moves the active piece down by one row.
  * If a collision occurs, it checks for landing and updates lock state.
  * Otherwise, resets lock state if previously touching ground.
  */
 export function playerDrop() {
+  if (!gameState?.player?.pos || !gameState?.arena) return;
   gameState.player.pos.y++;
-  gameState.score += SCORE.DROP;
 
   if (collide(gameState.arena, gameState.player)) {
     gameState.player.pos.y--;
-
     if (!gameState.isTouchingGround) {
       gameState.isTouchingGround = true;
       gameState.lockTimer = 0;
+      gameState.score += SCORE.DROP;
     }
   } else {
     if (gameState.isTouchingGround) {
       gameState.isTouchingGround = false;
       gameState.lockTimer = 0;
+    } else {
+      gameState.score += SCORE.DROP;
     }
   }
 
@@ -37,10 +39,36 @@ export function playerDrop() {
  * @param {number} dir - Direction to move (-1 for left, 1 for right).
  */
 export function playerMove(dir) {
+  if (!gameState?.player?.pos || !gameState?.arena) return;
+
   gameState.player.pos.x += dir;
   if (collide(gameState.arena, gameState.player)) {
     gameState.player.pos.x -= dir;
   }
+}
+
+export function holdPiece() {
+  if (gameState.holdUsed) return;
+
+  const currentType = gameState.lastPiece;
+  console.log("Current type:", currentType);
+  const newHold = currentType;
+
+  if (!gameState.heldPiece) {
+    gameState.heldPiece = newHold;
+    playerReset();
+  } else {
+    const temp = gameState.heldPiece;
+    gameState.heldPiece = newHold;
+    gameState.player.matrix = createPiece(temp);
+    gameState.player.type = temp;
+    gameState.player.pos.y = 0;
+    gameState.player.pos.x =
+      Math.floor(gameState.arena[0].length / 2) -
+      Math.floor(gameState.player.matrix[0].length / 2);
+  }
+
+  gameState.holdUsed = true;
 }
 
 /**
@@ -48,8 +76,12 @@ export function playerMove(dir) {
  * If the new piece immediately collides, it triggers a game over.
  */
 export function playerReset() {
+  if (!gameState?.arena || !gameState?.player) return;
+
+  gameState.holdUsed = false;
   gameState.player.matrix = createPiece(getNextPiece());
   gameState.player.pos.y = 0;
+
   gameState.player.pos.x =
     Math.floor(gameState.arena[0].length / 2) -
     Math.floor(gameState.player.matrix[0].length / 2);
@@ -80,6 +112,8 @@ export function playerRotate(matrix) {
  * Reverts rotation if no valid position is found.
  */
 export function playerRotateWrapper() {
+  if (!gameState?.player?.matrix || !gameState?.arena) return;
+
   const clonedMatrix = gameState.player.matrix.map((row) => [...row]);
   const originalX = gameState.player.pos.x;
 

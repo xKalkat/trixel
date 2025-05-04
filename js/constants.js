@@ -1,4 +1,3 @@
-// Stores global configuration values like score amounts, control keys, and color definitions.
 export const hiddenRows = 4;
 export const visibleRows = 18;
 export const SCORE = {
@@ -18,13 +17,13 @@ export const colors = [
   "#ff3030",
 ];
 
-export const KEY = {
+export const DEFAULT_KEYS = {
   LEFT: ["ArrowLeft", "a"],
   RIGHT: ["ArrowRight", "d"],
   DOWN: ["ArrowDown", "s"],
   ROTATE: ["ArrowUp", "w"],
   HARD_DROP: " ",
   TOGGLE_GHOST: "x",
+  HOLD: "c",
 };
-KEY.HORIZONTAL = [...KEY.LEFT, ...KEY.RIGHT];
 export const instantLockThreshold = 100;

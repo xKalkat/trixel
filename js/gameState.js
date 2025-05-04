@@ -10,7 +10,9 @@ export const gameState = {
   dasTimer: 0,
   moveHeld: false,
   downHeld: false,
+  showPieceBag: true,
   downTimer: 0,
+  instantSoftDropLock: false,
   downInterval: 50,
   lockDelay: 1000,
   lockTimer: 0,
@@ -25,5 +27,8 @@ export const gameState = {
     pos: { x: 0, y: 0 },
     matrix: null,
   },
+  lastPiece: null,
   arena: createMatrix(10, visibleRows + hiddenRows),
+  heldPiece: null,
+  holdUsed: false,
 };

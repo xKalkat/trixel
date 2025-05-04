@@ -4,9 +4,18 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Trixel</title>
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="base.css" />
+    <link rel="stylesheet" href="theme-classic.css" />
+    <link rel="stylesheet" href="theme-light.css" />
+    <link rel="stylesheet" href="theme-neon.css" />
+
     <link
+      rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap"
+      as="style"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap"
       rel="stylesheet"
     />
   </head>
@@ -14,22 +23,35 @@
     <div id="game-container">
       <div id="top-bar">
         <button id="restart" title="Restart">&#8634;</button>
-        <div id="score-container"><div id="score">0</div></div>
-        <button id="pause" title="Pause">&#10073;&#10073;</button>
+        <div id="score-container">
+          <div id="score">0</div>
+          <div id="best-score">Best Score: 36590</div>
+        </div>
+        <button id="pause" title="Pause">⏸</button>
       </div>
-
-      <div id="best-score">Best score: 0</div>
       <canvas id="trixel" width="300" height="540"></canvas>
-
+      <div id="piece-bag"></div>
+      <div id="pause-menu" style="display: none">
+        <h2>Game Paused</h2>
+        <button id="btn-edit-controls">Edit Controls</button>
+        <button id="btn-edit-theme">Edit Theme</button>
+        <!-- <button id="btn-leave-game">Leave Game</button> -->
+      </div>
       <div id="controls-overlay" class="overlay">
         <p>↑ W — Rotate</p>
         <p>← A / → D — Move</p>
         <p>↓ S — Soft drop</p>
         <p>Space — Hard drop</p>
         <p>X — Toggle ghost piece</p>
+        <p>C — Hold piece</p>
         <!-- 👈 new line -->
         <p>Esc — Close popup</p>
       </div>
+    </div>
+    <div id="controls-editor" style="display: none">
+      <h2>Edit Controls</h2>
+      <div id="controls-list"></div>
+      <button id="cancel-edit">Cancel</button>
     </div>
 
     <script type="module" src="main.js"></script>

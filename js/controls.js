@@ -8,7 +8,9 @@ import {
 import { collide, arenaSweep } from "./arena.js";
 import { merge } from "./playerState.js";
 import { commitChanges, saveGameState } from "./storage.js";
-import { KEY, SCORE } from "./constants.js";
+import { SCORE } from "./constants.js";
+import { KEY } from "./config.js";
+import { holdPiece } from "./player.js";
 
 /**
  * Determines if the provided key matches a bound key or one of multiple keys.
@@ -18,7 +20,11 @@ import { KEY, SCORE } from "./constants.js";
  * @returns {boolean} True if the key matches.
  */
 export function isKeyPressed(keys, key) {
-  return Array.isArray(keys) ? keys.includes(key) : key === keys;
+  const normalizedKey = key.toLowerCase();
+  if (Array.isArray(keys)) {
+    return keys.some((k) => k.toLowerCase() === normalizedKey);
+  }
+  return keys.toLowerCase() === normalizedKey;
 }
 
 /**
@@ -55,7 +61,6 @@ export function setupControls() {
       gameState.downHeld = true;
       gameState.downTimer = 0;
       playerDrop();
-      gameState.score += SCORE.DROP;
       commitChanges();
     } else if (isKeyPressed(KEY.ROTATE, key)) {
       playerRotateWrapper();
@@ -67,18 +72,22 @@ export function setupControls() {
       }
       gameState.player.pos.y--;
       merge(gameState.arena, gameState.player);
-      gameState.score += SCORE.LANDING;
       playerReset();
       arenaSweep();
       commitChanges();
     } else if (isKeyPressed(KEY.TOGGLE_GHOST, key)) {
       gameState.showGhost = !gameState.showGhost;
+    } else if (isKeyPressed(KEY.HOLD, key)) {
+      console.log("Hold key pressed");
+      holdPiece();
+      console.log("Hold piece:", gameState.heldPiece);
+      saveGameState();
     }
   });
 
   document.addEventListener("keyup", (event) => {
     const key = event.key;
-    if (isKeyPressed(KEY.HORIZONTAL, key)) {
+    if (isKeyPressed(KEY.LEFT, key) || isKeyPressed(KEY.RIGHT, key)) {
       gameState.moveHeld = false;
       gameState.moveDirection = 0;
       gameState.dasTimer = 0;

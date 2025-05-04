@@ -1,0 +1,30 @@
+body.theme-light {
+  --bg-color: #ffffff;
+  --accent-color: #333;
+  --text-color: #111;
+  --dim-text-color: #666;
+
+  --bg-gradient: none;
+  --box-glow: none;
+  --border-color: #ccc;
+  --text-glow: none;
+  --overlay-glow: none;
+  --overlay-bg: rgba(255, 255, 255, 0.6);
+
+  --button-bg: none;
+  --button-color: #333;
+  --button-text-shadow: none;
+  --button-border-radius: 4px;
+  --button-border: 1px solid #ccc;
+  --editor-bg: #f9f9f9;
+  --key-bg: #ddd;
+  --key-color: #111;
+  --add-key-bg: #bbb;
+  --remove-btn-color: #999;
+  --button-text-shadow: none;
+  --cell-glow: none;
+
+  --font-family: "Inter", "Segoe UI", sans-serif;
+  --overlay-font-family: "Segoe UI", sans-serif;
+  --overlay-font-size: 13px;
+}

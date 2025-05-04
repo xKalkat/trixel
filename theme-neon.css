@@ -1,0 +1,31 @@
+body.theme-neon {
+  --bg-color: #000;
+  --accent-color: #0ff;
+  --text-color: #fff;
+  --dim-text-color: #aaa;
+
+  --bg-gradient: radial-gradient(#000 40%, #111 100%);
+  --box-glow: 0 0 10px #0ff4;
+  --border-color: #0ff5;
+  --text-glow: 0 0 8px #0ff;
+  --overlay-glow: 0 -1px 5px #0ff3;
+  --overlay-bg: rgba(0, 0, 0, 0.6);
+
+  --button-bg: rgba(0, 255, 255, 0.1);
+  --button-color: #0ff;
+  --button-text-shadow: 0 0 5px #0ff;
+  --button-border-radius: 8px;
+  --button-border: 1px solid #0ff5;
+  --editor-bg: #111;
+  --key-bg: #222;
+  --key-color: #fff;
+  --add-key-bg: #333;
+  --remove-btn-color: #888;
+  --button-text-shadow: 0 0 4px var(--accent-color);
+
+  --cell-glow: pulse;
+
+  --font-family: "Orbitron", "Arial", sans-serif;
+  --overlay-font-family: monospace;
+  --overlay-font-size: 12px;
+}

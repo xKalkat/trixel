@@ -17,6 +17,12 @@ export function saveGameState() {
 export function loadGameState() {
   const state = JSON.parse(localStorage.getItem("trixelGameState"));
 
+  if (state) {
+    gameState.instantSoftDropLock =
+      state.instantSoftDropLock ?? gameState.instantSoftDropLock;
+    gameState.showPieceBag = state.showPieceBag ?? gameState.showPieceBag;
+  }
+
   if (!state || !state.player || !state.player.matrix) {
     playerReset();
     return false;
@@ -36,14 +42,24 @@ export function loadGameState() {
     }
   }
 
-  gameState.player.pos = { ...state.player.pos };
-  gameState.player.matrix = state.player.matrix.map((row) => [...row]);
-
-  gameState.score = state.score;
-  gameState.pieceBag = [...state.pieceBag];
-  gameState.isTouchingGround = state.isTouchingGround;
-  gameState.lockTimer = state.lockTimer;
-
+  gameState.instantSoftDropLock =
+    state.instantSoftDropLock ?? gameState.instantSoftDropLock;
+  gameState.showPieceBag = state.showPieceBag ?? gameState.showPieceBag;
+  gameState.player.pos = state.player?.pos ?? gameState.player.pos;
+  gameState.player.matrix = Array.isArray(state.player?.matrix)
+    ? state.player.matrix.map((row) => [...row])
+    : gameState.player.matrix;
+  gameState.lastPiece = state.lastPiece ?? gameState.lastPiece;
+  gameState.score =
+    typeof state.score === "number" ? state.score : gameState.score;
+  gameState.pieceBag = Array.isArray(state.pieceBag)
+    ? [...state.pieceBag]
+    : gameState.pieceBag;
+  gameState.isTouchingGround =
+    state.isTouchingGround ?? gameState.isTouchingGround;
+  gameState.lockTimer =
+    typeof state.lockTimer === "number" ? state.lockTimer : gameState.lockTimer;
+  gameState.heldPiece = state.heldPiece ?? gameState.heldPiece;
   updateScore();
 
   return gameInProgress;
@@ -63,11 +79,17 @@ export function maybeUpdateBestScore() {
 /**
  * Updates the score and best score elements in the UI.
  */
-
 export function updateScore() {
-  document.getElementById("score").textContent = `${gameState.score}`;
-  document.getElementById("best-score").textContent =
-    `Best Score: ${gameState.bestScore}`;
+  const scoreEl = document.getElementById("score");
+  const bestScoreEl = document.getElementById("best-score");
+
+  if (scoreEl) {
+    scoreEl.textContent = `${gameState.score}`;
+  }
+
+  if (bestScoreEl) {
+    bestScoreEl.textContent = `Best Score: ${gameState.bestScore}`;
+  }
 }
 
 /**
