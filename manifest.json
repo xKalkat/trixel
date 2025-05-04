@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Trixel",
+  "name": "Trixel - Tetris Falling Blocks Stacker",
   "version": "1.0",
   "description": "Trixel is a modern, glowy take on classic Tetris you can play right in your browser.",
   "action": {
