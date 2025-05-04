@@ -5,6 +5,7 @@ import { showControlsOverlay } from "./overlay.js";
 import { hiddenRows } from "./constants.js";
 import { gameState } from "./gameState.js";
 import { playerReset } from "./player.js";
+import { initializePieceBag } from "./pieces.js";
 
 /**
  * Merges the active piece into the arena.
@@ -49,7 +50,7 @@ export function gameOverReset() {
   gameState.lockTimer = 0;
   gameState.heldPiece = null;
   commitChanges();
-
   playerReset();
+  initializePieceBag();
   showControlsOverlay(true, 1000);
 }
